@@ -6,7 +6,6 @@ class FoldMedian extends Transform {
     }
 
     _transform(data, _, callback) {
-        // TODO: cleanup
         const sortedData = data.sort((a, b) => a - b);
         const isArrayLengthEven = sortedData.length % 2 === 0;
         const halfArrayLength = (sortedData.length - 1) / 2;
