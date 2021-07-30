@@ -4,5 +4,5 @@ pipeline(
     operators.filter(input => input > 0),
     operators.fixedEventWindow(2),
     operators.foldSum(),
-    operators.stdinSource(),
+    operators.fileSink(),
 )
