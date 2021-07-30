@@ -1,6 +1,6 @@
 const { Transform } = require('stream')
 
-const stdinSource = new Transform({
+const stdinSource = () => new Transform({
     objectMode: true,
     transform: (data, encoding, callback) => {
         // TODO: read one int from stdin
