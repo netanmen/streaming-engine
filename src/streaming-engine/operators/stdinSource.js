@@ -1,13 +1,16 @@
-const { Transform } = require('stream')
+const { Readable } = require('stream')
 
-const stdinSource = () => new Transform({
-    objectMode: true,
-    transform: (data, encoding, callback) => {
-        // TODO: read one int from stdin
-        const output = `>${data}${Array.isArray(data) ? '\n' : ''}`;
-        process.stdout.write(output);
-        
-        callback(null, data);
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: false
+})
+
+const stdinSource = () => new Readable({
+    read() {
+        readline.question('>', input => {
+            this.push(input);
+        });
     }
 });
 

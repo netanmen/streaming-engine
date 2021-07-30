@@ -19,7 +19,6 @@ const getOperators = () => {
 };
 
 const inputPipeline = (...operators) => pipeline(
-    process.stdin,
     ...operators,
     err => {
         if (err) {
