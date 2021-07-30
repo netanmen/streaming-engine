@@ -1,9 +1,11 @@
 const { Transform } = require('stream')
 
 const stdinSourceOperator = new Transform({
+    objectMode: true,
     transform: (data, encoding, callback) => {
-        const output = `>${data}`;
-        process.stdout.write(output)
+        // TODO: read one int from stdin
+        const output = `>${data}${Array.isArray(data) ? '\n' : ''}`;
+        process.stdout.write(output);
         
         callback(null, data);
     }

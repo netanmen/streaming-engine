@@ -1,19 +1,7 @@
-const {
-    pipeline,
-    stdinSourceOperator,
-    filterOperator,
-} = require('./operators/index')
+const { pipeline, operators } = require('./operators/index')
 
 pipeline(
-    process.stdin,
-    filterOperator(input => input > 0),
-    stdinSourceOperator,
-    // process.stdout,
-    err => {
-        if (err) {
-            console.log(`Pipeline failed: ${err}`)
-        } else {
-            console.log('Pipeline succeeded.')
-        }
-    }
+    operators.filterOperator(input => input > 0),
+    operators.fixedEventWindowOperator(2),
+    operators.stdinSourceOperator,
 )
