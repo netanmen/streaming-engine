@@ -1,6 +1,6 @@
 const { Transform } = require('stream')
 
-const filterOperator = predicate => new Transform({
+const filter = predicate => new Transform({
     transform: (data, encoding, callback) => {
         if (!predicate(data)) {
             callback();
@@ -11,4 +11,4 @@ const filterOperator = predicate => new Transform({
     }
 });
 
-module.exports = filterOperator;
+module.exports = filter;

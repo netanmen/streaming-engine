@@ -1,6 +1,6 @@
 const { Transform } = require('stream')
 
-const fixedEventWindowOperator = size => new Transform({
+const fixedEventWindow = size => new Transform({
     objectMode: true,
     transform: (data, encoding, callback) => {
         if (!this.fixedSizeArray) {
@@ -19,4 +19,4 @@ const fixedEventWindowOperator = size => new Transform({
     }
 });
 
-module.exports = fixedEventWindowOperator;
+module.exports = fixedEventWindow;

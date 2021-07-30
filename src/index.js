@@ -1,7 +1,7 @@
-const { pipeline, operators } = require('./operators/index')
+const { pipeline, operators } = require('./streaming-engine');
 
 pipeline(
-    operators.filterOperator(input => input > 0),
-    operators.fixedEventWindowOperator(2),
-    operators.stdinSourceOperator,
+    operators.filter(input => input > 0),
+    operators.fixedEventWindow(2),
+    operators.stdinSource,
 )
