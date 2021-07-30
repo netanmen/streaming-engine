@@ -1,12 +1,15 @@
 const { Transform } = require('stream')
 
-const foldSum = () => new Transform({
-    objectMode: true,
-    transform: (data, encoding, callback) => {
+class FoldSum extends Transform {
+    constructor() {
+        super({ objectMode: true });
+    }
+
+    _transform(data, _, callback) {
         const sum = data.reduce((sum, item) => sum + item, 0);
 
         callback(null, sum);
     }
-});
+}
 
-module.exports = foldSum;
+module.exports = () => new FoldSum();

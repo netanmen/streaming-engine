@@ -1,14 +1,19 @@
 const { Transform } = require('stream')
 
-const filter = predicate => new Transform({
-    transform: (data, encoding, callback) => {
-        if (!predicate(data)) {
+class Filter extends Transform {
+    constructor(predicate) {
+        super();
+        this.predicate = predicate;
+    }
+
+    _transform(data, _, callback) {
+        if (!this.predicate(data)) {
             callback();
             return;
         }
 
         callback(null, data);
     }
-});
+}
 
-module.exports = filter;
+module.exports = predicate => new Filter(predicate);

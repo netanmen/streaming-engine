@@ -6,12 +6,16 @@ const readline = require('readline').createInterface({
     terminal: false
 })
 
-const stdinSource = () => new Readable({
-    read() {
+class StdinSource extends Readable {
+    constructor() {
+        super();
+    }
+
+    _read() {
         readline.question('>', input => {
             this.push(input);
         });
     }
-});
+}
 
-module.exports = stdinSource;
+module.exports = () => new StdinSource();
