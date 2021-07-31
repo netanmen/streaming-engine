@@ -1,4 +1,5 @@
 const { Readable } = require('stream')
+const chalk = require('chalk');
 
 const readline = require('readline').createInterface({
     input: process.stdin,
@@ -12,10 +13,22 @@ class StdinSource extends Readable {
     }
 
     _read() {
-        readline.question('>', input => {
-            this.push(input);
-        });
+        const readInput = () => readline.question(
+            '>',
+            answer => {
+                if (!answer || !Number.isInteger(+answer)) {
+                    console.warn(chalk.yellow('input must be a number!'));
+                    readInput();
+
+                    return;
+                }
+
+                this.push(answer);
+            }
+        );
+
+        readInput();
     }
-}
+};
 
 module.exports = () => new StdinSource();
