@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { pipeline } = require('stream');
-const chalk = require('chalk');
+const pipeline = require('./pipeline');
 
 const getOperators = () => {
     const operatorsDirName = `${__dirname}/operators`;
@@ -19,18 +18,7 @@ const getOperators = () => {
     return operators;
 };
 
-const inputPipeline = (...operators) => pipeline(
-    ...operators,
-    err => {
-        if (err) {
-            console.warn(chalk.red(`Pipeline failed: ${err}`));
-        } else {
-            console.log(chalk.green('Pipeline completed.'));
-        }
-    }
-);
-
 module.exports = {
-    pipeline: inputPipeline,
+    pipeline,
     operators: getOperators()
 };
