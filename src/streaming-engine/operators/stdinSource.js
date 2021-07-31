@@ -17,7 +17,7 @@ class StdinSource extends Readable {
             '>',
             answer => {
                 if (!answer || !Number.isInteger(+answer)) {
-                    console.warn(chalk.yellow('input must be a number!'));
+                    console.warn(chalk.yellow('StdinSource warning: input must be a number!'));
                     readInput();
 
                     return;

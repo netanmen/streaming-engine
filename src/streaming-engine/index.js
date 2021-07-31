@@ -1,11 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const { pipeline } = require('stream');
+const chalk = require('chalk');
 
 const getOperators = () => {
     const operatorsDirName = `${__dirname}/operators`;
     const operators = {};
-    
+
     fs
         .readdirSync(operatorsDirName)
         .forEach(filename => {
@@ -22,9 +23,9 @@ const inputPipeline = (...operators) => pipeline(
     ...operators,
     err => {
         if (err) {
-            console.log(`Pipeline failed: ${err}`)
+            console.warn(chalk.red(`Pipeline failed: ${err}`));
         } else {
-            console.log('Pipeline succeeded.')
+            console.log(chalk.green('Pipeline completed.'));
         }
     }
 );
