@@ -1,6 +1,6 @@
 const { pipeline, operators } = require('./streaming-engine');
 
-pipeline(
+const runExamplePipeline = () => pipeline(
     operators.stdinSource(),
     operators.filter(input => input > 0),
     operators.fixedEventWindow(3),
@@ -8,4 +8,6 @@ pipeline(
     operators.fixedEventWindow(2),
     operators.foldSum(),
     operators.fileSink(),
-)
+);
+
+runExamplePipeline();
