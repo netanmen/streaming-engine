@@ -1,4 +1,5 @@
 const { Transform } = require('stream');
+const chalk = require('chalk');
 
 class FileSink extends Transform {
     constructor() {
@@ -6,7 +7,7 @@ class FileSink extends Transform {
     }
 
     _transform(data, _, callback) {
-        console.log(data);
+        console.log(chalk.green(data));
 
         callback(null, data);
     }
