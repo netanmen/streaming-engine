@@ -1,4 +1,4 @@
-const { Transform } = require('stream')
+const { Transform } = require('stream');
 
 class FixedEventWindow extends Transform {
     constructor(size) {
@@ -30,14 +30,13 @@ class FixedEventWindow extends Transform {
 
         this.fixedSizeArray.push(+data);
 
-        if (this.fixedSizeArray.length === this.size) {
-            callback(null, this.fixedSizeArray);
-            this.fixedSizeArray = [];
-
+        if (this.fixedSizeArray.length < this.size) {
+            callback();
             return;
         }
 
-        callback();
+        callback(null, this.fixedSizeArray);
+        this.fixedSizeArray = [];
     }
 }
 
